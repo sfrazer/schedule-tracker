@@ -32,6 +32,11 @@ their name once and the browser remembers it.
 
 ## Notes
 
+- **Cache busting.** `index.html` loads `style.css`, `config.js` and `app.js` with a
+  `?v=<hash>` of each file, so phones pick up changes instead of reusing old copies.
+  A pre-commit hook updates those hashes; after cloning, run `scripts/install-hooks.sh`
+  once (or run `scripts/stamp-assets.sh` by hand before committing).
+
 - **Open access.** Anyone who has the link can edit the schedule. The anon key only
   reaches the `claims` and `day_notes` tables.
 - **Free-tier pausing.** Supabase pauses free projects after about a week with no
