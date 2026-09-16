@@ -40,7 +40,7 @@ create table if not exists public.trip_window (
   end_day date not null check (end_day >= start_day)
 );
 insert into public.trip_window (id, start_day, end_day)
-values (true, '2026-10-19', '2026-10-28')
+values (true, '2026-09-19', '2026-09-28')
 on conflict (id) do update set start_day = excluded.start_day, end_day = excluded.end_day;
 
 -- Not readable by the public key; the check below runs with owner rights.

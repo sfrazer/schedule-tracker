@@ -6,8 +6,8 @@ window.APP_CONFIG = {
 
   // Trip dates, inclusive, as YYYY-MM-DD.
   // The database enforces these too: update trip_window in supabase/schema.sql to match.
-  TRIP_START: "2026-10-19",
-  TRIP_END: "2026-10-28",
+  TRIP_START: "2026-09-19",
+  TRIP_END: "2026-09-28",
 
   // Slot keys must match the check constraint in supabase/schema.sql.
   SLOTS: [
