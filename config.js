@@ -5,6 +5,7 @@ window.APP_CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_WA6S3XBhftPdtBeQ8KHzJA_Cmo9ahCf",
 
   // Trip dates, inclusive, as YYYY-MM-DD.
+  // The database enforces these too: update trip_window in supabase/schema.sql to match.
   TRIP_START: "2026-10-19",
   TRIP_END: "2026-10-28",
 

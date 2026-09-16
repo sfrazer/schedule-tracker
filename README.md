@@ -11,11 +11,12 @@ their name once and the browser remembers it.
 
 1. **Supabase**
    - Create a free project at <https://supabase.com>.
+   - Edit the `trip_window` dates in `supabase/schema.sql` to match your trip.
    - Open **SQL Editor**, paste in `supabase/schema.sql`, and run it.
    - Go to **Project Settings → API** and copy the Project URL and the `anon` public key.
 2. **Configure** — edit `config.js`:
    - `SUPABASE_URL`, `SUPABASE_ANON_KEY`
-   - `TRIP_START`, `TRIP_END` (inclusive, `YYYY-MM-DD`)
+   - `TRIP_START`, `TRIP_END` (inclusive, `YYYY-MM-DD`), the same dates as in `schema.sql`
 3. **Try it locally**
    ```sh
    python3 -m http.server 8000
@@ -23,11 +24,11 @@ their name once and the browser remembers it.
    ```
 4. **Publish on GitHub Pages**
    ```sh
-   git init && git add . && git commit -m "Dog Duty"
-   gh repo create dog-duty --public --source . --push
-   gh api -X POST repos/{owner}/dog-duty/pages -f 'source[branch]=main' -f 'source[path]=/'
+   git init && git add . && git commit -m "Schedule tracker"
+   gh repo create schedule-tracker --public --source . --push
+   gh api -X POST repos/{owner}/schedule-tracker/pages -f 'source[branch]=main' -f 'source[path]=/'
    ```
-   The site appears at `https://<your-user>.github.io/dog-duty/` after a minute or so.
+   The site appears at `https://<your-user>.github.io/schedule-tracker/` after a minute or so.
 
 ## Notes
 
@@ -38,4 +39,10 @@ their name once and the browser remembers it.
   project from the Supabase dashboard.
 - **Changing slots.** Slot keys live in both `config.js` and the check constraint in
   `supabase/schema.sql`; change them together.
-- **Resetting after a trip.** In the SQL editor: `truncate claims, day_notes;`
+- **Trip dates are enforced by the database.** Claims and notes outside the
+  `trip_window` dates are rejected, so the dates in `config.js` and `schema.sql` must match.
+- **New trip.** Update the dates in `config.js` and `supabase/schema.sql`, push, then in
+  the SQL editor run `truncate claims, day_notes;` and re-run `schema.sql` (it's safe to
+  run again).
+- **New tables.** Anything you add in the SQL editor needs Row Level Security turned on,
+  or the public key can read and write it.
