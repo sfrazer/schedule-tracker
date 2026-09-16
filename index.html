@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>Dog Duty</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>🐕 Dog Duty</h1>
+    <div class="who" id="who" hidden>
+      Hi, <strong id="who-name"></strong> · <button type="button" class="link" id="change-name">change name</button>
+    </div>
+    <div class="coverage" id="coverage"></div>
+  </header>
+
+  <main>
+    <div class="setup-error" id="setup-error" hidden></div>
+
+    <section class="calendar" id="calendar" aria-label="Trip calendar">
+      <div class="month-nav">
+        <button type="button" class="icon-btn" id="prev-month" aria-label="Previous month">‹</button>
+        <h2 id="month-title"></h2>
+        <button type="button" class="icon-btn" id="next-month" aria-label="Next month">›</button>
+      </div>
+      <div class="weekdays">
+        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="legend">
+        <span><i class="dot filled mine"></i> you</span>
+        <span><i class="dot filled"></i> taken</span>
+        <span><i class="dot"></i> open</span>
+        <span><i class="note-mark">✎</i> note</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- First-visit / change-name screen -->
+  <div class="overlay" id="name-screen" hidden>
+    <form class="card name-card" id="name-form">
+      <h2>What's your name?</h2>
+      <input id="name-input" type="text" maxlength="40" autocomplete="given-name"
+             placeholder="Your name" required>
+      <div class="chips" id="name-chips"></div>
+      <button type="submit" class="primary">Continue</button>
+    </form>
+  </div>
+
+  <!-- Day details -->
+  <div class="overlay sheet-overlay" id="sheet" hidden>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="sheet-head">
+        <button type="button" class="icon-btn" id="prev-day" aria-label="Previous day">‹</button>
+        <h2 id="sheet-title"></h2>
+        <button type="button" class="icon-btn" id="next-day" aria-label="Next day">›</button>
+        <button type="button" class="icon-btn close" id="close-sheet" aria-label="Close">✕</button>
+      </div>
+      <ul class="slots" id="slots"></ul>
+      <label class="note-label" for="day-note">Note for this day</label>
+      <textarea id="day-note" rows="3" maxlength="1000" placeholder="e.g. vet appt at 2pm"></textarea>
+      <div class="note-status" id="note-status"></div>
+    </div>
+  </div>
+
+  <!-- Assign / reassign picker -->
+  <div class="overlay" id="picker" hidden>
+    <form class="card" id="picker-form">
+      <h2 id="picker-title">Assign to…</h2>
+      <div class="chips" id="picker-chips"></div>
+      <input id="picker-input" type="text" maxlength="40" placeholder="Other name…">
+      <div class="row">
+        <button type="button" class="secondary" id="picker-cancel">Cancel</button>
+        <button type="submit" class="primary">Assign</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
